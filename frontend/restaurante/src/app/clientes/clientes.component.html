@@ -1,0 +1,76 @@
+<button pButton pRipple type="button" label="Agregar Cliente" class="p-button-success" (click)="mostrardialogo($event)"></button>
+<br/><br/>
+<p-table [value]="clientes">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cliente>
+        <tr>
+            <td>{{cliente.nombres}}</td>
+            <td>{{cliente.apellidos}}</td>
+            <td>{{cliente.dni}}</td>
+            <td>{{cliente.direccion}}</td>
+            <td>{{cliente.telefono}}</td>
+            <td>
+                <button pButton pRipple type="button" label="Actualizar" class="p-button-info" (click)="editarCliente($event,cliente)"></button>&nbsp;
+                <button pButton pRipple type="button" label="Eliminar" class="p-button-danger" (click)="eliminarCliente($event,cliente)"></button>&nbsp;
+                <button pButton pRipple type="button" label="Pedidos" class="p-button-help" (click)="mostrarPedidos($event,cliente)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog header="{{titulo}}" [(visible)]="mostrar" [modal]="true">
+    Nombres:&nbsp;
+    <input type="text" pInputText [(ngModel)]="nuevoCL.nombres"/>
+    <br/>
+    Apellidos:&nbsp;
+    <input type="text" pInputText [(ngModel)]="nuevoCL.apellidos"/>
+    <br/>
+    DNI:&nbsp;
+    <input type="text" pInputText [(ngModel)]="nuevoCL.dni"/>
+    <br/>
+    Dirección:&nbsp;
+    <input type="text" pInputText [(ngModel)]="nuevoCL.direccion"/>
+    <br/>
+    Teléfono:&nbsp;
+    <input type="text" pInputText [(ngModel)]="nuevoCL.telefono"/>
+    <br/><br/>
+    <button pButton pRipple type="button" label="Guardar" class="p-button-success" (click)="guardarCliente($event)"></button>
+</p-dialog>
+
+<p-confirmDialog header="Eliminar?" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<p-dialog header="Pedidos del Cliente" [(visible)]="mostrarP" [modal]="true">
+    <button pButton pRipple type="button" label="Agregar Pedido" class="p-button-success" (click)="agregarPedido($event)"></button>
+    <br/><br/>
+    <p-table [value]="pedidos">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Menu</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pedido>
+            <tr>
+                <td>{{pedido.cantidad}}</td>
+                <td>{{pedido.total}}</td>
+                <td>{{pedido.menu}}</td>
+                <td>
+                    <button pButton pRipple type="button" label="Actualizar" class="p-button-info" (click)="actualizarPedido($event,pedido)"></button>&nbsp;
+                    <button pButton pRipple type="button" label="Eliminar" class="p-button-danger" (click)="eliminarPedido($event,pedido)"></button>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>
+
+<p-confirmDialog header="Esta seguro?" icon="pi pi-exclamation-triangle"></p-confirmDialog>
